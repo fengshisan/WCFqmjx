@@ -15,6 +15,9 @@ namespace S_Client
         {
             using (ChannelFactory<ICalculator> channelFactory = new ChannelFactory<ICalculator>("calculatorservice"))
             {
+                //在这里其实有两种写法，一种是下面那个using(……),该种写法可以说是最正确的写法
+                //其原因是因为终结点有个地址报头，想要通过终结点地址验证就需要使用第一种写法，然鹅，也可以使用第二种
+                //第二种就简单了，直接在CalculatorService.cs文件中添加一个特性，具体可以自己去看，直接省略匹配地址报头
                 ICalculator calculator=channelFactory.CreateChannel();
                  Console.WriteLine("结果是" + calculator.Add(5, 6));
                 //using (OperationContextScope contextScope = new OperationContextScope(calculator as IClientChannel))
